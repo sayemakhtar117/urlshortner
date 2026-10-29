@@ -1,0 +1,22 @@
+version: '3'
+services:
+  app:
+    build: .
+    ports:
+      - "8080:8080"
+    environment:
+      SPRING_DATA_MONGODB_URI: mongodb://mongo:27017/urlshortener
+      SPRING_REDIS_HOST: redis
+      SPRING_REDIS_PORT: 6379
+      JWT_SECRET: ${JWT_SECRET:-local-development-secret-change-before-deploy-123456}
+      SPRING_SECURITY_USER_NAME: ${APP_USER:-urlshortener}
+      SPRING_SECURITY_USER_PASSWORD: ${APP_PASSWORD:-local-only-change-me}
+    depends_on: [mongo, redis]
+  mongo:
+    image: mongo:6.0
+    ports:
+      - "27017:27017"
+  redis:
+    image: redis:7.0
+    ports:
+      - "6379:6379"

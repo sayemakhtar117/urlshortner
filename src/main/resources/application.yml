@@ -1,0 +1,11 @@
+spring:
+  data:
+    mongodb:
+      uri: mongodb://localhost:27017/urlshortener
+  redis:
+    host: localhost
+    port: 6379
+
+app:
+  jwt:
+    secret: ${JWT_SECRET:local-development-secret-change-before-deploy-123456}
